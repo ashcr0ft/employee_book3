@@ -17,6 +17,14 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Integer getDepartment() {
+        return this.department;
+    }
+
+    public Integer getSalary() {
+        return salary;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

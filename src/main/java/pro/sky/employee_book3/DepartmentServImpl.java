@@ -2,28 +2,33 @@ package pro.sky.employee_book3;
 
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
 public class DepartmentServImpl implements DepartmentService {
-
-
-    @Override
-    public Employee findEmployeeMaxSalary(Integer department) {
-
-        return null;
+    private final EmployeeServ employeeService;
+    public DepartmentServImpl(EmployeeServ employeeService) {
+        this.employeeService = employeeService;
     }
 
     @Override
-    public Employee findEmployeeMinSalary(Integer department) {
-        return null;
+    public Optional<Employee> findEmployeeMaxSalary(Integer department) {
+        return employeeService.getAll().stream().filter(e->e.getDepartment().equals(department)).max(Comparator.comparingInt(Employee::getSalary));
     }
 
     @Override
-    public Employee allInDepartment(Integer department) {
-        return null;
+    public Optional<Employee> findEmployeeMinSalary(Integer department) {
+        return employeeService.getAll().stream().filter(e->e.getDepartment().equals(department)).min(Comparator.comparingInt(Employee::getSalary));
     }
 
     @Override
-    public Employee all(Integer department) {
-        return null;
+    public List<Employee> allInDepartment(Integer department) {
+        return employeeService.getAll().stream().filter(e->e.getDepartment().equals(department)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Employee> all() {
+        return employeeService.getAll().stream().toList();
     }
 }
