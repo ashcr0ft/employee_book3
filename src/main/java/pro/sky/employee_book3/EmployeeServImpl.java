@@ -1,9 +1,11 @@
 package pro.sky.employee_book3;
 
 import org.springframework.stereotype.Service;
-import pro.sky.employee_book.Exeptions.EmployeeAlreadyAddedException;
-import pro.sky.employee_book.Exeptions.EmployeeNotFound;
+import pro.sky.employee_book3.Exeptions.EmployeeAlreadyAddedException;
+import pro.sky.employee_book3.Exeptions.EmployeeNotFound;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,8 +20,8 @@ public class EmployeeServImpl implements EmployeeServ {
     }
 
     @Override
-    public Employee createEmployee(String surname, String firstName, String patronymic) {
-        Employee employee = new Employee(surname, firstName, patronymic);
+    public Employee createEmployee(String surname, String firstName, String patronymic, Integer department, Integer salary) {
+        Employee employee = new Employee(surname, firstName, patronymic, department, salary);
         String key  = generateKey(surname, firstName, patronymic);
         if (!employees.containsKey(key)) {
             employees.put(key, employee);
@@ -53,7 +55,7 @@ public class EmployeeServImpl implements EmployeeServ {
         throw new EmployeeNotFound("Сотрудник не найден");
     }
 
-    public String getAll() {
-      return employees.toString();
+    public Collection<Employee> getAll() {
+      return Collections.unmodifiableCollection(employees.values());
     }
 }

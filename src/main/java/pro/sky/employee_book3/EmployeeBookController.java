@@ -17,14 +17,16 @@ public class EmployeeBookController {
 
     @GetMapping()
     public String hello() {
-        return employeeService.getAll();
+        return employeeService.getAll().toString();
     }
 
     @GetMapping("/add")
     public String addEmployee(@RequestParam("surname") String surname,
                                 @RequestParam("firstName") String firstName,
-                                @RequestParam("patronymic") String patronymic) {
-        return employeeService.createEmployee(surname, firstName, patronymic).toString();
+                                @RequestParam("patronymic") String patronymic,
+                                @RequestParam("department") Integer department,
+                                @RequestParam("salary") Integer salary) {
+        return employeeService.createEmployee(surname, firstName, patronymic, department, salary).toString();
     }
 
     @GetMapping("/remove")
