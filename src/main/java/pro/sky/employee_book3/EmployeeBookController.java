@@ -1,0 +1,49 @@
+package pro.sky.employee_book3;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/employee")
+
+public class EmployeeBookController {
+    private final EmployeeServ employeeService;
+
+    public EmployeeBookController(EmployeeServ employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @GetMapping()
+    public String hello() {
+        return employeeService.getAll().toString();
+    }
+
+    @GetMapping("/add")
+    public String addEmployee(@RequestParam("surname") String surname,
+                                @RequestParam("firstName") String firstName,
+                                @RequestParam("patronymic") String patronymic,
+                                @RequestParam("department") Integer department,
+                                @RequestParam("salary") Integer salary) {
+        return employeeService.createEmployee(surname, firstName, patronymic, department, salary).toString();
+    }
+
+    @GetMapping("/remove")
+    public String removeEmployee(@RequestParam("surname") String surname,
+                                   @RequestParam("firstName") String firstName,
+                                   @RequestParam("patronymic") String patronymic) {
+        return employeeService.deleteEmployee(surname, firstName, patronymic).toString();
+
+    }
+
+    @GetMapping("/find")
+    public String findEmployee(@RequestParam("surname") String surname,
+                                 @RequestParam("firstName") String firstName,
+                                 @RequestParam("patronymic") String patronymic) {
+        return employeeService.findEmployee(surname, firstName, patronymic).toString();
+
+    }
+
+}
+
