@@ -1,5 +1,7 @@
 package pro.sky.employee_book3;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class Employee {
@@ -10,9 +12,9 @@ public class Employee {
     private final Integer salary;
 
     public Employee(String surname, String firstName, String patronymic, Integer department, Integer salary) {
-        this.surname = surname;
-        this.firstName = firstName;
-        this.patronymic = patronymic;
+        this.surname = StringUtils.capitalize(surname.toLowerCase());
+        this.firstName = StringUtils.capitalize(firstName.toLowerCase());
+        this.patronymic = StringUtils.capitalize(patronymic.toLowerCase());
         this.department = department;
         this.salary = salary;
     }
