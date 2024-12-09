@@ -25,7 +25,7 @@ public class EmployeeServImpl implements EmployeeServ {
     public Employee createEmployee(String surname, String firstName, String patronymic, Integer department, Integer salary) {
         validateName(surname, firstName, patronymic);
         Employee employee = new Employee(surname, firstName, patronymic, department, salary);
-        String key  = generateKey(surname, firstName, patronymic);
+        String key = generateKey(surname, firstName, patronymic);
         if (!employees.containsKey(key)) {
             employees.put(key, employee);
             return employee;
@@ -57,11 +57,12 @@ public class EmployeeServImpl implements EmployeeServ {
         if (employees.containsKey(key)) {
             return employees.get(key);
         } else {
-        throw new EmployeeNotFound("Сотрудник не найден");}
+            throw new EmployeeNotFound("Сотрудник не найден");
+        }
     }
 
     public Collection<Employee> getAll() {
-      return Collections.unmodifiableCollection(employees.values());
+        return Collections.unmodifiableCollection(employees.values());
     }
 
     private void validateName(String surname, String firstName, String patronymic) {
